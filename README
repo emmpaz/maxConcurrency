@@ -1,0 +1,33 @@
+Authors: Felipe Bautista Salamanca and Emmanuel Paz (Group Project 2 Group 27)
+
+Source Files
+    encrypt-module.c
+        Description: 
+            Source code provided by the Professor that allows to each one of the threads to perform various functions which are the following:
+                - clear_counts(): clears the current input and output count totals
+                - random_reset(): allows for a random reset to occur
+                - init() - Initiates all the required files 
+                - read_input() - read a character from the input file
+                - write_output() - write the character into the output file
+                - encrypt() - encrypts a given character using a key
+                - log_counts()- logs the current input and ouput counters
+                - count_input() - counts a given input character
+                - count_output() - counts a given output character
+                - get_input_total_count() - return the total number of input characters counted 
+                - get_output_total_count() - returns the total number of output characters counted
+                - get_input_count() - returns the count number for a given input letter
+                - get_output_count() - returns the count number for a given output letter
+            All the function are used in the encrypt-driver.c by a respective thread.
+    encrypt-driver.c
+        Description:
+            Program which ask the users for the sizes of a input and output buffers. Once the user has inputed this, it will create these buffers that will be used to enqueue and dequeue the character read from the file as well as the encrypted characters. There are five threads create which perform different functions:
+            - The reader thread is responsible for reading from the input file one character at a time and 
+            placing the characters in the input buffer. It must do so by calling the provided function read_input().
+            - The input counter thread simply counts occurrences of each letter in the input file by looking at each       character in the input buffer. It must call the provided function count_input().
+            - The encryption thread consumes one character at a time from the input buffer, encrypts it, and places it in the output buffer. It must do so by calling the provided function encrypt(). 
+            - The output counter thread simply counts occurrences of each letter in the output file by looking at each character in the output buffer. It must call the provided function count_output(). 
+            - The writer thread is responsible for writing the encrypted characters in the output buffer to the output file. It must do so by calling the provided function write_output().
+            Synchronization for this threads is accomplished by using semaphores as mutex locks and signal
+ 
+BUILDING AND RUNNING PROGRAM
+you can run "make".
